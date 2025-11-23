@@ -60,7 +60,7 @@ const DestroyerAnimation: React.FC<DestroyerAnimationProps> = ({ onComplete }) =
     const imageData = ctx.getImageData(0, 0, width, height);
     const data = imageData.data;
     const points: {x: number, y: number}[] = [];
-    const step = 5; // Sample density
+    const step = 6; // Sample density - increased for better performance
     
     for (let y = 0; y < height; y += step) {
         for (let x = 0; x < width; x += step) {
@@ -99,8 +99,8 @@ const DestroyerAnimation: React.FC<DestroyerAnimationProps> = ({ onComplete }) =
         const originY = 80;
 
         // 1. SHARDS (The UI breaking apart)
-        const cols = 50; 
-        const rows = 35;
+        const cols = 40; // Reduced from 50 for better performance
+        const rows = 28; // Reduced from 35 for better performance
         const cellW = width / cols;
         const cellH = height / rows;
 
@@ -226,7 +226,7 @@ const DestroyerAnimation: React.FC<DestroyerAnimationProps> = ({ onComplete }) =
         // --- NEW PARTICLES (Only during explosion phase) ---
         if (phase === 'explode') {
             // Smoke
-            if (frame > 2 && frame < 150 && frame % 2 === 0) {
+            if (frame > 2 && frame < 150 && frame % 3 === 0) { // Reduced frequency
                  particles.push({
                     x: originX + (Math.random() - 0.5) * 150,
                     y: originY + (Math.random() - 0.5) * 150,

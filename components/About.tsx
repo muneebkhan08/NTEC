@@ -5,7 +5,7 @@
 import React from 'react';
 import { Info } from 'lucide-react';
 
-const About: React.FC = () => {
+const About: React.FC = React.memo(() => {
   return (
     <div className="max-w-4xl mx-auto pt-10 animate-in fade-in slide-in-from-bottom-4">
       <div className="glass-panel p-8 rounded-3xl space-y-6">
@@ -29,5 +29,5 @@ const About: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 export default About;

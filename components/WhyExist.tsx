@@ -5,7 +5,7 @@
 import React from 'react';
 import { Target } from 'lucide-react';
 
-const WhyExist: React.FC = () => {
+const WhyExist: React.FC = React.memo(() => {
   return (
     <div className="max-w-4xl mx-auto pt-10 animate-in fade-in slide-in-from-bottom-4">
       <div className="glass-panel p-8 rounded-3xl space-y-6">
@@ -31,5 +31,5 @@ const WhyExist: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 export default WhyExist;

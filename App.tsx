@@ -3,17 +3,19 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import Home from './components/Home';
 import About from './components/About';
 import Team from './components/Team';
 import WhyExist from './components/WhyExist';
-import MemberForm from './components/MemberForm';
-import MentorForm from './components/MentorForm';
 import Contact from './components/Contact';
 import IntroAnimation from './components/IntroAnimation';
 import DestroyerAnimation from './components/DestroyerAnimation';
 import { PenTool, Menu, X, Info, Users, Target, UserPlus, Briefcase, MessageSquare } from 'lucide-react';
+
+// Lazy load form components for better performance
+const MemberForm = lazy(() => import('./components/MemberForm'));
+const MentorForm = lazy(() => import('./components/MentorForm'));
 
 const App: React.FC = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -142,8 +144,16 @@ const App: React.FC = () => {
                 {currentView === 'ABOUT' && <About />}
                 {currentView === 'TEAM' && <Team />}
                 {currentView === 'WHY_EXIST' && <WhyExist />}
-                {currentView === 'MEMBER_APPLY' && <MemberForm onBack={() => handleNav('HOME')} />}
-                {currentView === 'MENTOR_APPLY' && <MentorForm onBack={() => handleNav('HOME')} />}
+                {currentView === 'MEMBER_APPLY' && (
+                  <Suspense fallback={<div className="flex justify-center items-center min-h-[400px]"><div className="text-slate-400">Loading...</div></div>}>
+                    <MemberForm onBack={() => handleNav('HOME')} />
+                  </Suspense>
+                )}
+                {currentView === 'MENTOR_APPLY' && (
+                  <Suspense fallback={<div className="flex justify-center items-center min-h-[400px]"><div className="text-slate-400">Loading...</div></div>}>
+                    <MentorForm onBack={() => handleNav('HOME')} />
+                  </Suspense>
+                )}
             </div>
           </main>
 

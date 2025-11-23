@@ -72,8 +72,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         `}</style>
 
       {/* Hero Section */}
-      <div className="text-center space-y-6 mt-0 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-4xl mx-auto px-4">
-        <div className="inline-flex items-center gap-2 px-4 pd-2 rounded-full bg-white/5 border border-white/10 text-sm font-mono text-slate-300 mb-2">
+      <div className="text-center space-y-2 -mt-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-4xl mx-auto px-4">
+        <div className="inline-flex items-center gap-2 px-4 pd-2 rounded-full bg-white/5 border border-white/10 text-sm font-mono text-slate-300 mb-0">
             <span>Driving the Change from Scratch</span>
         </div>
         

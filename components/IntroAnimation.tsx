@@ -75,7 +75,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
 
     const chars = "010101<>{}[]/\\Σ∫πƒ∆∇NTEC";
     const particles: { x: number; y: number; z: number; char: string; color: string }[] = [];
-    const particleCount = 400; // Optimized count
+    const particleCount = 200; // Optimized count for smoother performance
     
     // Initialize
     for (let i = 0; i < particleCount; i++) {
@@ -108,12 +108,12 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
       const cy = height / 2;
 
       particles.forEach(p => {
-        let baseSpeed = 60;
+        let baseSpeed = 80; // Increased for smoother flow
         
         if (currentPhase === 'formula') {
-           baseSpeed = 5; 
+           baseSpeed = 8; 
         } else if (currentPhase === 'reveal') {
-           baseSpeed = 180;
+           baseSpeed = 200;
         }
 
         p.z -= baseSpeed * deltaTime;
@@ -134,7 +134,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
           const alpha = (1 - p.z / 4000); 
           
           // Optimize text rendering: skip very small particles
-          if (size > 1) {
+          if (size > 2) {
               ctx.font = `bold ${size}px "JetBrains Mono"`;
               ctx.fillStyle = p.color;
               ctx.globalAlpha = alpha;

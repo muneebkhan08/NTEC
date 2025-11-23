@@ -6,7 +6,7 @@
 import React from 'react';
 import { Mail, Phone, Linkedin, Facebook, Instagram, Twitter, MessageCircle, Send, Globe, MessageSquare } from 'lucide-react';
 
-const Contact: React.FC = () => {
+const Contact: React.FC = React.memo(() => {
   return (
     <div className="max-w-4xl mx-auto pt-10 animate-in fade-in slide-in-from-bottom-4 mb-20">
       <div className="glass-panel p-8 rounded-3xl space-y-8">
@@ -98,6 +98,6 @@ const Contact: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Contact;
