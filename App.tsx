@@ -10,9 +10,10 @@ import Team from './components/Team';
 import WhyExist from './components/WhyExist';
 import MemberForm from './components/MemberForm';
 import MentorForm from './components/MentorForm';
+import Contact from './components/Contact';
 import IntroAnimation from './components/IntroAnimation';
 import DestroyerAnimation from './components/DestroyerAnimation';
-import { PenTool, Menu, X, Info, Users, Target, UserPlus, Briefcase } from 'lucide-react';
+import { PenTool, Menu, X, Info, Users, Target, UserPlus, Briefcase, MessageSquare } from 'lucide-react';
 
 const App: React.FC = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -83,7 +84,7 @@ const App: React.FC = () => {
                 </div>
               </div>
               
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 md:gap-4">
                  <button 
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     className="p-2 md:p-2.5 rounded-xl bg-slate-900/50 border border-white/10 text-slate-400 hover:text-white hover:border-violet-500/50 transition-all hover:shadow-neon-violet active:scale-95"
@@ -96,6 +97,10 @@ const App: React.FC = () => {
               {isMenuOpen && (
                 <div className="absolute top-full right-0 mt-3 w-80 glass-panel rounded-2xl p-2 animate-in fade-in slide-in-from-top-4 shadow-2xl z-50 overflow-hidden flex flex-col bg-[#0f172a]/95 backdrop-blur-xl border border-white/10">
                     <nav className="flex flex-col gap-1 p-2">
+                        <button onClick={() => handleNav('CONNECT')} className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white transition-all text-left group">
+                            <MessageSquare className="w-4 h-4 text-indigo-400 group-hover:text-indigo-300" />
+                            <span className="font-medium font-sans">Connect</span>
+                        </button>
                         <button onClick={() => handleNav('ABOUT')} className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white transition-all text-left group">
                             <Info className="w-4 h-4 text-violet-400 group-hover:text-violet-300" />
                             <span className="font-medium font-sans">About Us</span>
@@ -133,6 +138,7 @@ const App: React.FC = () => {
           <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8 flex flex-col relative z-0">
             <div className="flex-1">
                 {currentView === 'HOME' && <Home onNavigate={handleNav} />}
+                {currentView === 'CONNECT' && <Contact />}
                 {currentView === 'ABOUT' && <About />}
                 {currentView === 'TEAM' && <Team />}
                 {currentView === 'WHY_EXIST' && <WhyExist />}
