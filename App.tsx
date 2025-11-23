@@ -74,7 +74,7 @@ const App: React.FC = () => {
                     NTEC 
                     <button 
                         onClick={handleSelfDestruct}
-                        className="px-2 py-0.5 rounded-md bg-white/5 hover:bg-red-500/20 text-[10px] font-mono text-slate-400 hover:text-red-400 border border-white/5 hover:border-red-500/30 hidden sm:inline-block transition-all active:scale-95 cursor-pointer select-none"
+                        className="px-2 py-0.5 rounded-md bg-white/5 hover:bg-red-500/20 text-[10px] font-mono text-slate-400 hover:text-red-400 border border-white/5 hover:border-red-500/30 inline-block transition-all active:scale-95 cursor-pointer select-none"
                         title="Do not press"
                     >
                         New
