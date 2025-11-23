@@ -50,13 +50,16 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
     setFormulaText('');
     if (typewriterIntervalRef.current) clearInterval(typewriterIntervalRef.current);
     
+    const isMobile = window.innerWidth < 768;
+    const speed = isMobile ? 35 : 50; // Faster on mobile
+    
     typewriterIntervalRef.current = setInterval(() => {
       setFormulaText(text.substring(0, i + 1));
       i++;
       if (i > text.length && typewriterIntervalRef.current) {
         clearInterval(typewriterIntervalRef.current);
       }
-    }, 50);
+    }, speed);
   };
 
   // Canvas Warp Drive Effect
@@ -75,7 +78,8 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
 
     const chars = "010101<>{}[]/\\Σ∫πƒ∆∇NTEC";
     const particles: { x: number; y: number; z: number; char: string; color: string }[] = [];
-    const particleCount = 200; // Optimized count for smoother performance
+    const isMobile = width < 768;
+    const particleCount = isMobile ? 100 : 200; // Reduced for mobile performance
     
     // Initialize
     for (let i = 0; i < particleCount; i++) {
@@ -133,8 +137,9 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
           const size = (1 - p.z / 4000) * 30; 
           const alpha = (1 - p.z / 4000); 
           
-          // Optimize text rendering: skip very small particles
-          if (size > 2) {
+          // Optimize text rendering: skip very small particles (larger threshold on mobile)
+          const minSize = width < 768 ? 3 : 2;
+          if (size > minSize) {
               ctx.font = `bold ${size}px "JetBrains Mono"`;
               ctx.fillStyle = p.color;
               ctx.globalAlpha = alpha;
@@ -168,10 +173,10 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       {/* Phase 2: The Formula (Text) */}
-      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-700 transform ${phase === 'formula' ? 'scale-100 opacity-100 blur-0' : 'scale-150 opacity-0 blur-xl pointer-events-none'}`}>
-         <div className="relative group text-center px-4">
-            <div className="absolute -inset-12 bg-violet-500/20 rounded-full blur-3xl animate-pulse"></div>
-            <h1 className="relative text-3xl md:text-6xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-violet-200 to-emerald-200 tracking-widest drop-shadow-[0_0_25px_rgba(139,92,246,0.6)]">
+      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out transform ${phase === 'formula' ? 'scale-100 opacity-100 blur-0' : 'scale-150 opacity-0 blur-xl pointer-events-none'}`}>
+         <div className="relative group text-center px-4 sm:px-6">
+            <div className="absolute -inset-8 sm:-inset-12 bg-violet-500/20 rounded-full blur-2xl sm:blur-3xl animate-pulse"></div>
+            <h1 className="relative text-2xl sm:text-4xl md:text-6xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-violet-200 to-emerald-200 tracking-wider sm:tracking-widest drop-shadow-[0_0_20px_rgba(139,92,246,0.6)] sm:drop-shadow-[0_0_25px_rgba(139,92,246,0.6)]">
               {formulaText}
               <span className="animate-pulse text-emerald-400">_</span>
             </h1>
